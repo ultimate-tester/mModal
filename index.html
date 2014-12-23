@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="mModal.css">
+</head>
+<body>
+	<a href="clickMe" id="open-modal">Open Modal</a>
+	
+	<div class="mModal" id="demo-modal">
+		<div class="mModal-content">
+			<h1 style="margin: 0 0 15px 0;padding: 0;">mModal Demo</h1>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat iaculis felis eu aliquam. Morbi nec porttitor turpis. Suspendisse sit amet magna eu est interdum efficitur ut sit amet ex. Donec enim nisl, interdum a ipsum gravida, bibendum congue est. Ut aliquet, ligula quis molestie lobortis, lorem purus cursus neque, non blandit purus lacus et ex. Donec commodo odio ut odio varius rutrum. In tincidunt quam condimentum, aliquet mi non, molestie dui. Nulla quis justo tortor. Suspendisse lobortis nisl pulvinar ex lobortis, quis volutpat tortor congue. Fusce mi tortor, tincidunt sed tempor ac, tempor nec tellus. 
+		</div>
+		
+		<div class="mModal-buttons">
+			<a class="mModal-no" href="javascript://" style="background-color: #bdc3c7;color:#000000;">No</a>
+			<a class="mModal-yes" href="javascript://" style="background-color: #2980b9;">Yes</a>
+		</div>
+	</div>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="mModal.js"></script>
+	
+	<script type="text/javascript">
+		$(function() {
+			$('#open-modal').mModal({
+				modal: $('#demo-modal'),
+				yes: function(modal) {
+					modal.closeModal();
+				},
+				no: function(modal) {
+					modal.closeModal();
+				}
+			});
+		});
+	</script>
+</body>
+</html>
