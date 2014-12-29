@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="mModal.css">
 </head>
 <body>
-	<a href="clickMe" id="open-modal">Open Modal</a>
+	<a href="clickMe" id="open-modal">Full Featured Modal</a>
 	
 	<div class="mModal" id="demo-modal">
 		<div class="mModal-content">
@@ -14,8 +14,8 @@
 		</div>
 		
 		<div class="mModal-buttons">
-			<a class="mModal-no" href="javascript://" style="background-color: #bdc3c7;color:#000000;">No</a>
-			<a class="mModal-yes" href="javascript://" style="background-color: #2980b9;">Yes</a>
+			<a data-mModalCallback="no" href="javascript://" style="background-color: #bdc3c7;color:#000000;">No</a>
+			<a data-mModalCallback="yes" href="javascript://" style="background-color: #2980b9;">Yes</a>
 		</div>
 	</div>
 	
@@ -26,11 +26,19 @@
 		$(function() {
 			$('#open-modal').mModal({
 				modal: $('#demo-modal'),
-				yes: function(modal) {
-					modal.closeModal();
-				},
-				no: function(modal) {
-					modal.closeModal();
+				appearAnimation: 'slide',
+				disappearAnimation: 'slide',
+				appearSlideDirection: 'down',
+				disappearSlideDirection: 'up',
+				animateResize: true,
+				closeButton: true,
+				callbacks: {
+					yes: function(modal) {
+						modal.closeModal();
+					},
+					no: function(modal) {
+						modal.closeModal();
+					}
 				}
 			});
 		});
