@@ -1,4 +1,4 @@
 mModal
 ======
 
-The officiel mModal respository
+The official mModal respository
