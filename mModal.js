@@ -134,7 +134,7 @@
 			settings.modal.closeModal();
 		});
 		
-		$(window).off('resize').resize(function(e) {
+		$(window).resize(function(e) {
 			settings.modal.centerModal();
 		}).trigger('resize');
 	};
