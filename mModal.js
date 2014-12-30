@@ -2,6 +2,7 @@
 	$.fn.mModal = function(options) {
 		var settings = $.extend({
 			modal: null,						// the modal itself
+			contentUrl: '',						// load content from the given URL
 			callbacks: [],						// button callbacks
 			appearAnimation: 'fade',			// 'fade' or 'slide'
 			disappearAnimation: 'fade',			// 'fade' or 'slide'
@@ -17,6 +18,7 @@
 		}
 		
 		var modalLink = $(this);
+		var modalContent = settings.modal.find('.mModal-content');
 		var modalButtons = settings.modal.find('.mModal-buttons').children();
 		var modalCloseButton = (settings.closeButton) ? $('<div class="mModal-close"></div>').appendTo(settings.modal) : $();
 		var modalCover = null;
@@ -27,10 +29,21 @@
 		modalButtons.outerWidth(settings.modal.width() / modalButtons.length);
 		
 		settings.modal.openModal = function() {
+			if(settings.contentUrl.length > 0) {
+				var matches = settings.contentUrl.match(/(http(s)?:\/\/)?(www\.)?youtu(\.)?be(.+)?v=(.+)/i);
+				if(matches != null) {
+					var youtubeIframe = $('<iframe width="100%" height="100%" src="https://www.youtube.com/embed/'+matches[6]+'?rel=0&amp;showinfo=0&amp;autoplay=1" frameborder="0"></iframe>').appendTo(modalContent).hide();
+					youtubeIframe.load(function() { $(this).delay(100).fadeIn('slow'); });
+				} else {
+					modalContent.load(settings.contentUrl);
+				}
+				
+				modalContent.outerHeight(settings.modal.outerHeight());
+				settings.modal.centerModal();
+			}
+		
 			modalCover = settings.modal.wrap($('<div class="mModal-cover"></div>')).parent();
-			modalCover.off('click').click(function(e) {
-				settings.modal.closeModal();
-			}).hide();
+			modalCover.off('click').click(function(e) { settings.modal.closeModal(); }).hide();
 			
 			if(settings.appearAnimation == 'slide') {
 				modalCover.fadeIn('fast', function() {
@@ -91,6 +104,10 @@
 					modalCover.fadeOut('fast', function() {
 						settings.modal.hide();
 						settings.modal.unwrap();
+						
+						if(settings.contentUrl.length > 0) {
+							modalContent.empty();
+						}
 					});
 				});
 			}
@@ -99,6 +116,10 @@
 				modalCover.fadeOut('fast', function() {
 					settings.modal.hide();
 					settings.modal.unwrap();
+					
+					if(settings.contentUrl.length > 0) {
+						modalContent.empty();
+					}
 				});
 			}
 		};

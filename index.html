@@ -5,9 +5,11 @@
 	<link rel="stylesheet" type="text/css" href="mModal.css">
 </head>
 <body>
-	<a href="clickMe" id="open-modal">Full Featured Modal</a>
+	<a href="javascript://" id="open-modal">Full Featured Modal</a>
+	<a href="javascript://" id="open-modal2">Modal Without Buttons</a>
+	<a href="javascript://" id="open-modal3">Youtube Modal</a>
 	
-	<div class="mModal" id="demo-modal">
+	<div class="mModal" id="full-modal">
 		<div class="mModal-content">
 			<h1 style="margin: 0 0 15px 0;padding: 0;">mModal Demo</h1>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat iaculis felis eu aliquam. Morbi nec porttitor turpis. Suspendisse sit amet magna eu est interdum efficitur ut sit amet ex. Donec enim nisl, interdum a ipsum gravida, bibendum congue est. Ut aliquet, ligula quis molestie lobortis, lorem purus cursus neque, non blandit purus lacus et ex. Donec commodo odio ut odio varius rutrum. In tincidunt quam condimentum, aliquet mi non, molestie dui. Nulla quis justo tortor. Suspendisse lobortis nisl pulvinar ex lobortis, quis volutpat tortor congue. Fusce mi tortor, tincidunt sed tempor ac, tempor nec tellus. 
@@ -19,13 +21,25 @@
 		</div>
 	</div>
 	
+	<div class="mModal" id="buttonless-modal">
+		<div class="mModal-content">
+			<h1 style="margin: 0 0 15px 0;padding: 0;">mModal Demo</h1>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat iaculis felis eu aliquam. Morbi nec porttitor turpis. Suspendisse sit amet magna eu est interdum efficitur ut sit amet ex. Donec enim nisl, interdum a ipsum gravida, bibendum congue est. Ut aliquet, ligula quis molestie lobortis, lorem purus cursus neque, non blandit purus lacus et ex. Donec commodo odio ut odio varius rutrum. In tincidunt quam condimentum, aliquet mi non, molestie dui. Nulla quis justo tortor. Suspendisse lobortis nisl pulvinar ex lobortis, quis volutpat tortor congue. Fusce mi tortor, tincidunt sed tempor ac, tempor nec tellus. 
+		</div>
+	</div>
+	
+	<div class="mModal" id="youtube-modal" style="width:1280px;height:720px;">
+		<div class="mModal-content">
+		</div>
+	</div>
+
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript" src="mModal.js"></script>
 	
 	<script type="text/javascript">
 		$(function() {
 			$('#open-modal').mModal({
-				modal: $('#demo-modal'),
+				modal: $('#full-modal'),
 				appearAnimation: 'slide',
 				disappearAnimation: 'slide',
 				appearSlideDirection: 'down',
@@ -40,6 +54,17 @@
 						modal.closeModal();
 					}
 				}
+			});
+			
+			$('#open-modal2').mModal({
+				modal: $('#buttonless-modal'),
+				closeButton: false
+			});
+			
+			$('#open-modal3').mModal({
+				modal: $('#youtube-modal'),
+				contentUrl: 'https://www.youtube.com/watch?v=3bEtJgnd86M',
+				closeButton: false
 			});
 		});
 	</script>
