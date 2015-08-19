@@ -9,7 +9,8 @@
             appearSlideDirection: 'down',		// 'up', 'right', 'down' or 'left'
             disappearSlideDirection: 'up',		// 'up', 'right', 'down' or 'left'
             animateResize: true,				// animate to the new centre position instead of instant
-            closeButton: true					// show a close button at the upper right corner
+            closeButton: true,					// show a close button at the upper right corner
+            closeOnCoverClick: true             // close the modal if the cover is clicked
         }, options);
 
         if (settings.modal == null || typeof settings.modal == 'undefined') {
@@ -26,6 +27,7 @@
         settings.modal.off('click').click(function (e) {
             e.stopImmediatePropagation();
         }).hide();
+
         modalButtons.outerWidth(settings.modal.width() / modalButtons.length);
 
         settings.modal.openModal = function () {
@@ -46,7 +48,9 @@
 
             modalCover = settings.modal.wrap($('<div class="mModal-cover"></div>')).parent();
             modalCover.off('click').click(function (e) {
-                settings.modal.closeModal();
+                if (settings.closeOnCoverClick) {
+                    settings.modal.closeModal();
+                }
             }).hide();
 
             if (settings.appearAnimation == 'slide') {
