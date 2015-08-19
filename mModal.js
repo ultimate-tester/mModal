@@ -1,5 +1,5 @@
 (function ($) {
-    $.fn.mModal = function (options) {
+    $.fn.mModal = function (options, waitForEvent) {
         var settings = $.extend({
             modal: null,						// the modal itself
             contentUrl: '',						// load content from the given URL
@@ -16,6 +16,10 @@
         if (settings.modal == null || typeof settings.modal == 'undefined') {
             console.error('The given modal was not set or found!');
             return false;
+        }
+
+        if (typeof waitForEvent == 'undefined') {
+            waitForEvent = true;
         }
 
         var modalLink = $(this);
@@ -137,11 +141,6 @@
             }
         };
 
-        modalLink.click(function (e) {
-            e.preventDefault();
-            settings.modal.openModal();
-        });
-
         modalCloseButton.off('click').click(function (e) {
             e.preventDefault();
             settings.modal.closeModal();
@@ -150,5 +149,18 @@
         $(window).resize(function (e) {
             settings.modal.centerModal();
         }).trigger('resize');
+
+        if (waitForEvent == true) {
+            modalLink.click(function (e) {
+                e.preventDefault();
+                settings.modal.openModal();
+            });
+        } else {
+            settings.modal.openModal();
+        }
+    };
+
+    $.mModal = function (options) {
+        $.fn.mModal(options, false);
     };
 }(jQuery));
